@@ -1,4 +1,4 @@
 class Creator < ApplicationRecord
-  belongs_to :event
+  has_one :event
   belongs_to :user
 end
