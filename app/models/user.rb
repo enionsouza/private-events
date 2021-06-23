@@ -15,8 +15,11 @@ class User < ApplicationRecord
   end
 
   def show_events
-    events = creators.map(&:event)
-    events.compact
+    creators.map(&:event).compact
+  end
+
+  def show_invitations
+    attendees.map(&:event).compact
   end
 end
 

@@ -27,7 +27,7 @@
                     <%@users.each do |user|%>
                 <tr>
                     <td><%= user.username%></td>
-                    <td><%= link_to "See profile", '/users/' + user.id.to_s %>
+                    <td><%= link_to 'See profile', '/users/' + user.id.to_s %></td>
                 </tr>
                     <%end%>
             </table>
