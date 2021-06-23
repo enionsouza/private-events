@@ -4,16 +4,19 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :creators
-  has_many :guests 
+  has_many :attendees
 
-  def create_event(title, date, location)
-    creator= self.creators.build()
-    creator.save
-    event = creator.build_event({title: title, date: date, location: location})
-    event.save unless event.nil?
+  # typically, 'arg' is a hash like: {title: 'title', date: 'date', location: 'location'}
+  def create_event(arg)
+    creator = creators.build
+    creator&.save
+    event = creator.build_event(arg)
+    event&.save
   end
+
   def show_events
-    self.creators.select{|creator| creator.event unless creator.event.nil?}
+    events = creators.map(&:event)
+    events.compact
   end
 end
 
