@@ -1,6 +1,6 @@
 class Event < ApplicationRecord
   belongs_to :creator
-  has_many :attendees
+  has_many :attendees, dependent: :delete_all
 
 
   scope :past, -> { where('date < ?',Time.now ).order(:date)}
