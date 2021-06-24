@@ -1,29 +1,7 @@
 <h1>Edit <%= @event.title %>:</h1>
 
 
-<%= form_with(model: @event, method: "patch") do |f| %>
-  <% if @event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
-
-      <ul>
-        <% @event.errors.each do |error| %>
-          <li class="danger"><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <%= f.label :title, "Title:" %>
-  <%= f.text_field :title %>
-  <br/>
-  <%= f.label :date, "Date:" %>
-  <%= f.date_field :date %>
-  <br/>
-  <%= f.label :location, "Where?:" %>
-  <%= f.text_field :location %>
-  <br/>
-  <%= f.submit %>
-<% end %>
+<%= render 'form', event: @event%>
 
 <%=link_to "Home", root_path%>
 <%=link_to "Back", :back%>

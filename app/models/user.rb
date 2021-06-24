@@ -12,6 +12,7 @@ class User < ApplicationRecord
     creator&.save
     event = creator.build_event(arg)
     event&.save
+    event
   end
 
   def show_events
