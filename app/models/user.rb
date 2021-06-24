@@ -6,6 +6,10 @@ class User < ApplicationRecord
   has_many :creators, dependent: :delete_all
   has_many :attendees, dependent: :delete_all
 
+  validates :username, presence: true, uniqueness: true, length:{in: 3..15}
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, presence: true, uniqueness: true
+  validates :password, presence: true, length:{in: 6..20}
+
   # typically, 'arg' is a hash like: {title: 'title', date: 'date', location: 'location'}
   def create_event(arg)
     creator = creators.build
