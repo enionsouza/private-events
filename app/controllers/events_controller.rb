@@ -10,4 +10,31 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @user = User.find(@event.creator.user_id)
   end
+
+  def edit
+    @event = Event.find(params[:id]) if Event.find(params[:id]).creator.user == current_user
+  end
+
+  def update
+    event = Event.find(params[:id])
+    if event.update(event_params) && (current_user.creators.include? event.creator)
+      redirect_to root_path
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    event = Event.find(params[:id])
+    event.attendees.delete_all
+    creator = event.creator
+    event.delete # if current_user.creators.include? event.creator
+    creator.delete
+    redirect_to root_path
+  end
+
+  private
+  def event_params
+    params.require(:event).permit(:title, :date, :location)
+  end
 end

@@ -14,3 +14,15 @@
 
 <%=link_to "Home", root_path%>
 <%=link_to "Back", :back%>
+<br/>
+
+<% if @event.creator.user == current_user %>
+    <%= link_to "Edit", edit_event_path(@event)%>
+    <%= link_to "Delete", event_path(@event), method: :delete %>
+<% else %>
+    <% if @event.attendees.where(user_id: current_user.id).empty? %>
+        <%= link_to  "Attend this Event", attendees_create_path(event_id: @event.id) %>
+    <% else %>
+        <%= link_to  "I won't attend this Event", root_path + 'attendees/' + @event.id.to_s, method: :delete %>
+    <% end %>
+<% end %>
