@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
-  
+
   def new
     @event = Event.new
   end
@@ -9,7 +9,7 @@ class EventsController < ApplicationController
     @event = current_user.create_event(event_params)
     redirect_to event_path(@event)
   end
-  
+
   def index
     @events = Event.all.order(:date)
     @users = User.all
@@ -43,6 +43,7 @@ class EventsController < ApplicationController
   end
 
   private
+
   def event_params
     params.require(:event).permit(:title, :date, :location)
   end
