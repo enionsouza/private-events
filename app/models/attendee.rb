@@ -5,8 +5,8 @@ class Attendee < ApplicationRecord
   validate :assistance
 
   def assistance
-    unless Attendee.where(user_id: user_id, event_id: event_id).empty?
-      errors.add(:user_id, "is already attending this event")
-    end
+    return if Attendee.where(user_id: user_id, event_id: event_id).empty?
+
+    errors.add(:user_id, 'is already attending this event')
   end
 end
