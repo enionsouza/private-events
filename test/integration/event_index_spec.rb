@@ -21,7 +21,7 @@ RSpec.describe 'Root page', type: :system do
       end
     end
     describe "Handling authentications and authorizations", type: :feature do
-        
+
         it "asks for login when leaving index if not logged in" do
           visit root_path
           click_link 'Create an event'
@@ -67,6 +67,50 @@ RSpec.describe 'Root page', type: :system do
         fill_in 'Password', with: 'Secret1'
         click_button 'Log in'
         expect(page).to have_content 'New Event'
+      end
+
+      it 'signs me up' do
+        visit root_path
+        click_link 'Sign up'
+        fill_in 'Username', with: 'user001'
+        fill_in 'Email', with: 'user001@example.com'
+        fill_in 'Password', with: 'Secret1'
+        fill_in 'Password confirmation', with: 'Secret1'
+        click_button 'Sign up'
+        expect(page).to have_content 'Welcome! You have signed up successfully.'
+      end
+
+      it 'rejects invalid username for sign up' do
+        visit root_path
+        click_link 'Sign up'
+        fill_in 'Username', with: 'aa'
+        fill_in 'Email', with: 'user001@example.com'
+        fill_in 'Password', with: 'Secret1'
+        fill_in 'Password confirmation', with: 'Secret1'
+        click_button 'Sign up'
+        expect(page).to have_content 'Username is too short (minimum is 3 characters)'
+      end
+
+      it 'rejects invalid email for sign up' do
+        visit root_path
+        click_link 'Sign up'
+        fill_in 'Username', with: 'user001'
+        fill_in 'Email', with: '@example.com'
+        fill_in 'Password', with: 'Secret1'
+        fill_in 'Password confirmation', with: 'Secret1'
+        click_button 'Sign up'
+        expect(User.all.empty?).to eq(true)
+      end
+
+      it 'rejects wrong password confirmation for sign up' do
+        visit root_path
+        click_link 'Sign up'
+        fill_in 'Username', with: 'user001'
+        fill_in 'Email', with: 'user001@example.com'
+        fill_in 'Password', with: 'Secret1'
+        fill_in 'Password confirmation', with: 'Secret2'
+        click_button 'Sign up'
+        expect(page).to have_content 'Password confirmation doesn\'t match Password'
       end
     end
 end

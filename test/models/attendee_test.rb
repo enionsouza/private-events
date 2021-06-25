@@ -17,6 +17,7 @@ class AttendeeTest < ActiveSupport::TestCase
         user2 = User.new(user2_data)
         user2.save
         event = user1.create_event(event1_data)
+        event.save
         attendee1 = Attendee.new(user_id: user2.id, event_id: event.id)
         expect(attendee1.valid?).to eq(true)
       end
@@ -24,6 +25,7 @@ class AttendeeTest < ActiveSupport::TestCase
         user1 = User.new(user1_data)
         user1.save
         event = user1.create_event(event1_data)
+        event.save
         attendee1 = Attendee.new(user_id: user1.id, event_id: event.id)
         expect(attendee1.valid?).to eq(false)
       end
@@ -31,6 +33,7 @@ class AttendeeTest < ActiveSupport::TestCase
         user1 = User.new(user1_data)
         user1.save
         event = user1.create_event(event1_data)
+        event.save
         attendee1 = Attendee.new(user_id: user1.id, event_id: event.id)
         attendee1.valid?
         expect(attendee1.errors.full_messages).to eq(['User can\'t be the same as creator'])

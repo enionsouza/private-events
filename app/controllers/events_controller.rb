@@ -9,7 +9,7 @@ class EventsController < ApplicationController
     @event = current_user.create_event(event_params)
     if @event.save
       redirect_to event_path(@event)
-    else 
+    else
       render :new
     end
   end 
@@ -29,9 +29,9 @@ class EventsController < ApplicationController
   end
 
   def update
-    event = Event.find(params[:id])
-    if event.update(event_params) && (current_user.creators.include? event.creator)
-      redirect_to root_path
+    @event = Event.find(params[:id])
+    if @event.update(event_params)
+      redirect_to event_path(@event)
     else
       render :edit
     end
@@ -41,7 +41,7 @@ class EventsController < ApplicationController
     event = Event.find(params[:id])
     event.attendees.delete_all
     creator = event.creator
-    event.delete # if current_user.creators.include? event.creator
+    event.delete
     creator.delete
     redirect_to root_path
   end
