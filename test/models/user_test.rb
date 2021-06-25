@@ -5,8 +5,9 @@ class UserTest < ActiveSupport::TestCase
   #   assert true
   # end
 
-  user1_data = {username: 'fernado', email: 'fernando@example.com', password: 'Secret1', password_confirmation: 'Secret1'}
-  invalid_user_data = {username: 'aa', email: '@aa', password: 'pass', password_confirmation: 'Secret1'}
+  user1_data = { username: 'fernado', email: 'fernando@example.com', password: 'Secret1',
+                 password_confirmation: 'Secret1' }
+  invalid_user_data = { username: 'aa', email: '@aa', password: 'pass', password_confirmation: 'Secret1' }
 
   RSpec.describe User do
     context 'checking validations for creation' do
@@ -21,7 +22,11 @@ class UserTest < ActiveSupport::TestCase
       it 'presents the proper errors for invalid users' do
         invalid_user = User.new(invalid_user_data)
         invalid_user.valid?
-        expect(invalid_user.errors.full_messages).to eq(['Email is invalid', 'Password confirmation doesn\'t match Password', 'Password is too short (minimum is 6 characters)', 'Username is too short (minimum is 3 characters)'])
+        error_msgs = ['Email is invalid',
+                      'Password confirmation doesn\'t match Password',
+                      'Password is too short (minimum is 6 characters)',
+                      'Username is too short (minimum is 3 characters)']
+        expect(invalid_user.errors.full_messages).to eq(error_msgs)
       end
       it 'rejects the repetion of an existing user' do
         User.create(user1_data)

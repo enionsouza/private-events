@@ -12,7 +12,7 @@ class EventsController < ApplicationController
     else
       render :new
     end
-  end 
+  end
 
   def index
     @events = Event.all.order(:date)

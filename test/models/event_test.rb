@@ -5,9 +5,9 @@ class EventTest < ActiveSupport::TestCase
   #   assert true
   # end
 
-  user1_data = {username: 'fernado', email: 'fernando@example.com', password: 'Secret1', password_confirmation: 'Secret1'}
-  event1_data = {title: 'Fernando\'s Awesome Party!', date: Time.now, location: 'Fernando\'s'}
-
+  user1_data = { username: 'fernado', email: 'fernando@example.com', password: 'Secret1',
+                 password_confirmation: 'Secret1' }
+  event1_data = { title: 'Fernando\'s Awesome Party!', date: Time.now, location: 'Fernando\'s' }
 
   RSpec.describe Event do
     context 'checking validations for creating events' do

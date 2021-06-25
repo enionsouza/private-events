@@ -11,8 +11,6 @@ class Attendee < ApplicationRecord
   end
 
   def prevent_creator_as_attendee
-    if Event.find(event_id).creator.user_id == user_id
-      errors.add(:user_id, 'can\'t be the same as creator')
-    end
+    errors.add(:user_id, 'can\'t be the same as creator') if Event.find(event_id).creator.user_id == user_id
   end
 end

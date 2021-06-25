@@ -5,9 +5,11 @@ class AttendeeTest < ActiveSupport::TestCase
   #   assert true
   # end
 
-  user1_data = {username: 'fernado', email: 'fernando@example.com', password: 'Secret1', password_confirmation: 'Secret1'}
-  user2_data = {username: 'anne_smith', email: 'anne_smith@example.com', password: 'Secret1', password_confirmation: 'Secret1'}
-  event1_data = {title: 'Fernando\'s Awesome Party!', date: Time.now, location: 'Fernando\'s'}
+  user1_data = { username: 'fernado', email: 'fernando@example.com', password: 'Secret1',
+                 password_confirmation: 'Secret1' }
+  user2_data = { username: 'anne_smith', email: 'anne_smith@example.com', password: 'Secret1',
+                 password_confirmation: 'Secret1' }
+  event1_data = { title: 'Fernando\'s Awesome Party!', date: Time.now, location: 'Fernando\'s' }
 
   RSpec.describe Attendee do
     context 'checking for attendees creation' do
