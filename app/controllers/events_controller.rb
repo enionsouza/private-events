@@ -7,8 +7,12 @@ class EventsController < ApplicationController
 
   def create
     @event = current_user.create_event(event_params)
-    redirect_to event_path(@event)
-  end
+    if @event.save
+      redirect_to event_path(@event)
+    else 
+      render :new
+    end
+  end 
 
   def index
     @events = Event.all.order(:date)

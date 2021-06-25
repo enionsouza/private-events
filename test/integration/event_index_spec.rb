@@ -59,7 +59,7 @@ RSpec.describe 'Root page', type: :system do
         expect(page).to have_content 'Invalid Email or password.'
       end
 
-      it "allows me to create events if logged in" do
+      it "allows me into events/new if logged in" do
         User.create({username:'user001', email:'user001@example.com',password: 'Secret1',password_confirmation: 'Secret1'})
         visit root_path
         click_link 'Create an event'
