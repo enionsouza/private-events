@@ -37,7 +37,7 @@ For this project, the following environment should be previously installed on yo
 - Go to your terminal bash and, on any directory of your preference, run
 
 ```sh
-$ git clone git@github.com:enionsouza/private-events.git
+git clone git@github.com:enionsouza/private-events.git
 ```
 
 - Next, run `$ cd private-events` to go into the project root directory.
@@ -45,7 +45,7 @@ $ git clone git@github.com:enionsouza/private-events.git
 - And, finally, to prevent any issue that might eventually come up because of webpacker package, run
 
 ```sh
-$ rails webpacker:install
+rails webpacker:install
 ```
 
 ### Install
@@ -67,8 +67,8 @@ _Important: Please, note that the validations presented below should be taken in
 - Notice that when you are not logged in, you cannot see more details about the events!
 
         Users
-          has_many :creators
-          has_many :attendees
+          has_many :events
+          has_many :attended_events
           - username:string
           - email:string
           - password:string
@@ -81,16 +81,13 @@ _Important: Please, note that the validations presented below should be taken in
           - location:string
           - creator:references
 
-        Creators
-          belongs_to :users
-          has_many :events
-          - user:references
-
-        Attendees
+        Attendances
           belongs_to :users
           belongs_to :events
           - event:references
           - user:references
+
+  ![screenshot](./img/screenshot_dbdiagram.io.png)
 
 ### Tests
 
