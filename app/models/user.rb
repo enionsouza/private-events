@@ -11,18 +11,4 @@ class User < ApplicationRecord
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, presence: true, uniqueness: true
   validates :password, presence: true, length: { in: 6..20 }
 
-  # typically, 'arg' is a hash like: {title: 'title', date: 'date', location: 'location'}
-  # def create_event(arg)
-  #   creator = creators.build
-  #   creator&.save
-  #   creator.build_event(arg)
-  # end
-
-  # def show_events
-  #   creators.map(&:event).compact
-  # end
-
-  # def show_invitations
-  #   attendees.map(&:event).compact
-  # end
 end

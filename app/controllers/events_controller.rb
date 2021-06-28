@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = current_user.create_event(event_params)
+    @event = current_user.events.build(event_params)
     if @event.save
       redirect_to event_path(@event)
     else
@@ -21,11 +21,14 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-    @user = User.find(@event.creator.user_id)
+    @user = User.find(@event.creator_id)
+    @attendees = @event.attendees
+    @attending = @event.attendees.where(user_id: current_user.id).any?
+    @owner = @event.where(creator_id: current_user.id).any?
   end
 
   def edit
-    @event = Event.find(params[:id]) if Event.find(params[:id]).creator.user == current_user
+    @event = Event.find(params[:id]) if Event.find(params[:id]).creator == current_user
   end
 
   def update
@@ -38,11 +41,7 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    event = Event.find(params[:id])
-    event.attendees.delete_all
-    creator = event.creator
-    event.delete
-    creator.delete
+    Event.find(params[:id]).delete
     redirect_to root_path
   end
 
@@ -51,4 +50,5 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:title, :date, :location)
   end
+
 end

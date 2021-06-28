@@ -10,4 +10,5 @@ class Event < ApplicationRecord
   scope :past, -> { where('date < ?', Time.now).order(date: :desc) }
 
   scope :upcoming, -> { where('date >= ?', Time.now).order(:date) }
+
 end

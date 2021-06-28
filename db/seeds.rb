@@ -28,62 +28,45 @@ User.create([
     }
 ])
 
-User.first.create_event( 
+User.first.events.create([
     {
-        title: 'User001\'s Birthday Party: 45 years old!',
-        date: '2021-01-01 22:00:00.000000000 -0000',
-        location: 'User001\'s Place'}
-)
-User.first.create_event( 
-    {
-        title: 'User001\'s Birthday Party: 46 years old!',
-        date: '2022-01-01 22:00:00.000000000 -0000',
-        location: 'User001\'s Place'}
-)
-User.second.create_event( 
-    {
-        title: 'User002\'s Birthday Party: 15 years old!',
-        date: '2021-02-01 22:00:00.000000000 -0000',
-        location: 'User002\'s Place'}
-)
-User.second.create_event( 
-    {
-        title: 'User002\'s Birthday Party: 16 years old!',
-        date: '2022-02-01 22:00:00.000000000 -0000',
-        location: 'User002\'s Place'}
-)
-
-Attendee.create([
-    {
-        user_id: User.second.id,
-        event_id: Event.first.id
+        title: 'User001\'s very first party',
+        date: '2022-10-10',
+        location: 'Maine Café'
     },
     {
-        user_id: User.third.id,
-        event_id: Event.first.id
-    },
-    {
-        user_id: User.second.id,
-        event_id: Event.second.id
-    },
-    {
-        user_id: User.third.id,
-        event_id: Event.second.id
-    },
-    {
-        user_id: User.first.id,
-        event_id: Event.third.id
-    },
-    {
-        user_id: User.third.id,
-        event_id: Event.third.id
-    },
-    {
-        user_id: User.first.id,
-        event_id: Event.fourth.id
-    },
-    {
-        user_id: User.third.id,
-        event_id: Event.fourth.id
+        title: 'User001\'s second party',
+        date: '2022-10-12',
+        location: 'Maine Night Club'
     }
-])
+    ])
+User.second.events.create([
+    {
+        title: 'User002\'s very first party',
+        date: '2022-11-10',
+        location: 'Maine Café'
+    },
+    {
+        title: 'User002\'s second party',
+        date: '2022-11-12',
+        location: 'Maine Night Club'
+    }
+    ])
+
+Event.first.attendances.create([
+    {user_id: 2},
+    {user_id: 3}
+    ])
+Event.second.attendances.create([
+    {user_id: 2},
+    {user_id: 4},
+    ])
+Event.third.attendances.create([
+    {user_id: 1},
+    {user_id: 3}
+    ])
+Event.fourth.attendances.create([
+    {user_id: 1},
+    {user_id: 4},
+    ])
+
