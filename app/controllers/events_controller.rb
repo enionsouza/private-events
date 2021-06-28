@@ -23,8 +23,8 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @user = User.find(@event.creator_id)
     @attendees = @event.attendees
-    @attending = @event.attendees.where(user_id: current_user.id).any?
-    @owner = @event.where(creator_id: current_user.id).any?
+    @attending = @event.attendees.where(id: current_user.id).any?
+    @owner = @event.creator == current_user
   end
 
   def edit
