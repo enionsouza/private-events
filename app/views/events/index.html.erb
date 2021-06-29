@@ -11,12 +11,12 @@
             <th colspan='1'></th>
         </tr>
             <%Event.upcoming.each do |event|%>
-        <tr>
-            <td><%= event.title%></td>
-            <td><%= event.date%></td>
-            <td><%= event.location%></td>
-            <td><%= link_to "See more", event_path(event)%>
-        </tr>
+                <tr>
+                    <td><%= event.title%></td>
+                    <td><%= event.date%></td>
+                    <td><%= event.location%></td>
+                    <td><%= link_to "See more", event_path(event)%>
+                </tr>
             <%end%>
     </table>  
 <h3>Past events</h3>

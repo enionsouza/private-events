@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  get 'attendees/create'
-  delete 'attendees/:event_id', to: 'attendees#destroy'
   root to: 'events#index'
+  delete 'attendances/:id/:event_id', to: 'attendances#destroy'
   devise_for :users, controllers: { registrations: 'users/registrations' }
   # resources :attendees, only: [:create, :destroy]
   resources :events

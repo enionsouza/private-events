@@ -3,11 +3,11 @@
 <p>Date: <%= @event.date.to_date%> </p>
 <p>Time: <%= @event.date.strftime("%I:%M%p")%> </p>
 <p>Where?: <%= @event.location%> </p>
-<h2>Guests List</h2>
+<h2>Attendees List</h2>
 <table>
     <%@attendees.each do |attendee|%>
             <tr>
-                <td><%= attendee.user.username%></td>
+                <td><%= attendee.username%></td>
             </tr>
     <%end%>
 </table>
@@ -21,8 +21,6 @@
     <%= link_to "Delete", event_path(@event), method: :delete %>
 <% else %>
     <% if @attending %>
-        <%= link_to  "I won't attend this Event", root_path + 'attendees/' + @event.id.to_s, method: :delete %>
-    <% else %>
-        <%= link_to  "Attend this Event", attendees_create_path(event_id: @event.id) %>
+        <%= link_to  "I won't attend this Event", root_path + 'attendances/' + @attendance.id.to_s + '/' + @event.id.to_s, method: :delete %>
     <% end %>
 <% end %>
