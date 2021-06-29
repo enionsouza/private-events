@@ -21,6 +21,6 @@
     <%= link_to "Delete", event_path(@event), method: :delete %>
 <% else %>
     <% if @attending %>
-        <%= link_to  "I won't attend this Event", root_path + 'attendances/' + @attendance.id.to_s + '/' + @event.id.to_s, method: :delete %>
+        <%= link_to  "I won't attend this Event", attendance_unattend_path(current_user.id, @event.id),method: :delete%>
     <% end %>
 <% end %>

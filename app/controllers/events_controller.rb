@@ -30,6 +30,8 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.find(params[:id]) if Event.find(params[:id]).creator == current_user
+    @invited = @event.attendees
+    @uninvited = User.where.not(id: @event.attendees.select{|user|user.id}).where.not(id: @event.creator_id)
   end
 
   def update
@@ -45,10 +47,10 @@ class EventsController < ApplicationController
     Event.find(params[:id]).delete
     redirect_to root_path
   end
-
   private
 
   def event_params
     params.require(:event).permit(:title, :date, :location)
   end
+
 end
