@@ -10,7 +10,7 @@
             <th>Location</th>
             <th colspan='1'></th>
         </tr>
-            <%Event.upcoming.each do |event|%>
+            <% @events.upcoming.each do |event|%>
                 <tr>
                     <td><%= event.title%></td>
                     <td><%= event.date%></td>
@@ -28,7 +28,7 @@
                     <th>Date</th>
                     <th>Location</th>
                 </tr>
-                    <%Event.past.each do |event|%>
+                    <% @events.past.each do |event|%>
                 <tr>
                     <td><%= event.title%></td>
                     <td><%= event.date%></td>
