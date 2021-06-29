@@ -95,13 +95,10 @@ _Important: Please, note that the validations presented below should be taken in
 - On the root of the project, run
 
 ```sh
-$ rspec test/models/user_test.rb
-$ rspec test/models/event_test.rb
-$ rspec test/models/attendee_test.rb
-$ rspec test/integration/event_edit_spec.rb
-$ rspec test/integration/event_index_spec.rb
-$ rspec test/integration/event_new_spec.rb
+$ rails db:migrate RAILS_ENV=test
+$ rspec
 ```
+Some of the tests are run by Capybara, so you'll see a Chrome tab flashing through pieces of the web application. This is a bot running tests as if it were a user. Don't try to close this window.
 
 ## Authors
 

@@ -39,6 +39,8 @@ class EventsController < ApplicationController
     if @event.update(event_params)
       redirect_to event_path(@event)
     else
+      @invited = @event.attendees
+      @uninvited = User.where.not(id: @event.attendees.select(&:id)).where.not(id: @event.creator_id)
       render :edit
     end
   end

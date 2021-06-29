@@ -5,7 +5,7 @@ RSpec.describe 'Edit an existing Event', type: :system do
     user1 = User.new({ username: 'user001', email: 'user001@example.com', password: 'Secret1',
                        password_confirmation: 'Secret1' })
     user1.save
-    event1 = user1.create_event({ title: 'My Awesome Party', date: Time.now, location: 'At my club!' })
+    event1 = user1.events.build({ title: 'My Awesome Party', date: Time.now, location: 'At my club!' })
     event1.save
   end
 

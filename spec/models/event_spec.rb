@@ -14,14 +14,13 @@ class EventTest < ActiveSupport::TestCase
       it 'creates an event from an existing user' do
         user1 = User.new(user1_data)
         user1.save
-        user1.create_event(event1_data).save
+        user1.events.create(event1_data)
         expect(Event.first.id).to eq(1)
       end
       it 'rejects an invalid event creation with a creator' do
         user1 = User.new(user1_data)
         user1.save
-        creator1 = Creator.new(user_id: user1.id)
-        invalid_event = Event.new(title: 'Come', date: Time.now, location: 'Anne\'s Place', creator_id: creator1.id)
+        invalid_event = Event.new(title: 'Come', date: Time.now, location: 'Anne\'s Place', creator_id: user1.id)
         expect(invalid_event.valid?).to eq(false)
       end
       it 'rejects an event creation with no creator' do
