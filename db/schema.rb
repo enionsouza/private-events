@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_22_171018) do
+ActiveRecord::Schema.define(version: 2021_06_28_192828) do
 
-  create_table "creators", force: :cascade do |t|
-    t.integer "event_id", null: false
+  create_table "attendances", force: :cascade do |t|
     t.integer "user_id", null: false
+    t.integer "event_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["event_id"], name: "index_creators_on_event_id"
-    t.index ["user_id"], name: "index_creators_on_user_id"
+    t.index ["event_id"], name: "index_attendances_on_event_id"
+    t.index ["user_id"], name: "index_attendances_on_user_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -27,15 +27,8 @@ ActiveRecord::Schema.define(version: 2021_06_22_171018) do
     t.string "location"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "guests", force: :cascade do |t|
-    t.integer "event_id", null: false
-    t.integer "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["event_id"], name: "index_guests_on_event_id"
-    t.index ["user_id"], name: "index_guests_on_user_id"
+    t.integer "creator_id", null: false
+    t.index ["creator_id"], name: "index_events_on_creator_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -51,8 +44,7 @@ ActiveRecord::Schema.define(version: 2021_06_22_171018) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "creators", "events"
-  add_foreign_key "creators", "users"
-  add_foreign_key "guests", "events"
-  add_foreign_key "guests", "users"
+  add_foreign_key "attendances", "events"
+  add_foreign_key "attendances", "users"
+  add_foreign_key "events", "users", column: "creator_id"
 end
