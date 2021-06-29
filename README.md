@@ -6,7 +6,7 @@
 
 ![screenshot](./img/screenshot.png)
 
-In this project we built a site similar to Eventbrite which allows users to create events and then manage user signups. Users can create events or join other user's events if they want to. Events take place at a specific date and at a location.
+In this project we built a site similar to a private Eventbrite which allows users to create events and then manage user signups. Users can create events and send invitations to parties. Events take place at a specific date and at a location.
 
 For this project, we learned about Associations and how to perform Tests in Rails (_unit tests_ for models associations and validations and _integrations tests_ for authentication and events managment) using Capybara to control Selenium on Chrome Webdriver and RSpec.
 
